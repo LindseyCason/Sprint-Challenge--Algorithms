@@ -96,10 +96,41 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        SortingRobot.swap_item(self)
+        SortingRobot.move_right(self)
+        print(robot._light(self))
+
+        while SortingRobot.can_move_right(self) == True:
+            if SortingRobot.compare_item(self) == -1:
+                print("CURRENT NUMBER ", robot._item)
+                SortingRobot.swap_item(self)
+                SortingRobot.move_right(self)
+                # SortingRobot.compare_item(self)
+                print(robot._list)
+                print(f"Swapped and Move Right, NEW NUMBER: {robot._item}")  
+            elif SortingRobot.compare_item(self) == 1:
+                print("You've hit a one, move right")
+                SortingRobot.move_right(self)
+                # SortingRobot.compare_item(self)
+                
+            if SortingRobot.compare_item(self) == 0:
+                print("You've hit a zero")
+                SortingRobot.move_right(self)
+            elif SortingRobot.compare_item(self)== None:
+                SortingRobot.move_right(self)
 
 
+    #U- SORT ARRAY FROM SMALLEST TO LARGEST WITHOUT USING BUILT IN METHODS. ONLY USING THE FUNCTIONS(ESSENTIALLY METHODS) TO MOVE THE NUMBERS
+    #P- INITIALLY YOU'RE HOLDING NOTHING(NONE), SWAP THAT WITH THE FIRST NUMBER(SWAP), SINCE YOU DO NOT WANT TO COMPARE IT WITH THE NONE YOU JUST SWAPPED IT WITH, MOVE RIGHT FIRST THEN.. 
+        # WHITE BASE CASE IS TRUE LIGHT ON:
+            #WHILE CAN MOVE RIGHT IS TRUE
+            #   COMPARE:
+                    #IF (-1) THE NUMBER YOU'RE HOLDING IS LESS, SWAP AND MOVE RIGHT
+                    #ELIF(1) THE NUMBER YOU'RE HOLDING IS BIGGER, SIMPLY MOVE RIGHT
+                    #ELIF(0) IF THEY'RE EQUAL, MOVE RIGHT
+                    #ELIF(NONE) MOVE RIGHT, SWAP
+        
+            
 if __name__ == "__main__":
     # Test our your implementation from the command line
     # with `python robot_sort.py`
