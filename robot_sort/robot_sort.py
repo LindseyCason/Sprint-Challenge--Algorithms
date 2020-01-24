@@ -96,29 +96,38 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
+        SortingRobot.set_light_on(self)
         SortingRobot.swap_item(self)
-        SortingRobot.move_right(self)
-        print("initial setting ",robot._light)
-        while SortingRobot.light_is_on(self) == True:
-            while SortingRobot.light_is_on(self) == False:
+
+        while SortingRobot.light_is_on(self):
+            SortingRobot.set_light_off(self)
+
+            while SortingRobot.can_move_right(self):
+                SortingRobot.move_right(self)
+
                 if SortingRobot.compare_item(self) == -1:
-                    print("CURRENT NUMBER ", robot._item)
                     SortingRobot.swap_item(self)
-                    SortingRobot.set_light_off(self)
-                    SortingRobot.move_right(self)
-                    # SortingRobot.compare_item(self)
-                    print(robot._list)
-                    print(f"Swapped and Move Right, NEW NUMBER: {robot._item}")  
+                    
                 elif SortingRobot.compare_item(self) == 1:
-                    print("You've hit a one, move right")
-                    SortingRobot.move_right(self)
                     SortingRobot.set_light_on(self)
-                    # SortingRobot.compare_item(self)
-                if SortingRobot.compare_item(self) == 0:
-                    print("You've hit a zero")
-                    SortingRobot.move_right(self)
-                elif SortingRobot.compare_item(self)== None:
-                    SortingRobot.move_right(self)
+
+            while SortingRobot.can_move_left(self):
+
+                if SortingRobot.compare_item(self) == 1:
+                    SortingRobot.swap_item(self)
+
+                elif SortingRobot.compare_item(self)==-1:
+                    SortingRobot.set_light_on(self)
+
+                SortingRobot.move_left(self)
+                
+        SortingRobot.swap_item(self) #PICKING BACK UP NONE
+                
+                
+
+
+                
+
 
 
     #U- SORT ARRAY FROM SMALLEST TO LARGEST WITHOUT USING BUILT IN METHODS. ONLY USING THE FUNCTIONS(ESSENTIALLY METHODS) TO MOVE THE NUMBERS
@@ -130,6 +139,21 @@ class SortingRobot:
                     #ELIF(1) THE NUMBER YOU'RE HOLDING IS BIGGER, SIMPLY MOVE RIGHT
                     #ELIF(0) IF THEY'RE EQUAL, MOVE RIGHT
                     #ELIF(NONE) MOVE RIGHT, SWAP
+
+    #PLAN B WHILE THE LIGHT IS ON
+
+        # WHILE THE LIGHT IS OFF:
+            #while can move right
+                #COMPARE:
+                    #IF (-1) THE NUMBER YOU'RE HOLDING IS LESS, SWAP, LIGHT ON AND MOVE RIGHT
+                    #ELIF(1) THE NUMBER YOU'RE HOLDING IS BIGGER, SIMPLY MOVE RIGHT
+                    #ELIF(0) IF THEY'RE EQUAL, MOVE RIGHT
+                    #ELIF(NONE) SWAP, MOVE RIGHT
+            # IF CAN MOVE RIGHT IS FALSE
+                #WE'RE AT THE END, IF LIGHT IS ON, TURN IT OFF
+            #WHILE CAN GO LEFT IS TRUE
+                # IF CAN MOVE LEFT IS FALSE AND LIGHT IS ON, TURN IT OFF
+
         
             
 if __name__ == "__main__":
